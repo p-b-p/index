@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dynamic Image Selector</title>
+    <script>
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+      function setImageBasedOnQueryParam() {
+        // Get the 'image' parameter from the URL (example.html?image=imageName)
+        const imageName = getQueryParam("image");
+        // Set the image source dynamically
+        const imageElement = document.getElementById("dynamicImage");
+        if (imageName) {
+          imageElement.src = `img/ohab/${imageName}.png`;
+          imageElement.alt = `Image for ${imageName}`;
+        } else {
+          console.error("No 'image' parameter found in the URL.");
+          imageElement.alt = "Image not specified";
+        }
+      }
+      window.onload = setImageBasedOnQueryParam;
+    </script>
+  </head>
+  <body style="background-color: rgba(0,0,0,1.0);">
+    <img
+      id="dynamicImage"
+      style="display: block; margin-top: 34px; margin-left: auto; margin-right: auto;"
+      src=""
+      alt="Dynamic Image"
+      height="592"
+    />
+  </body>
+</html>
