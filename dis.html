@@ -8,10 +8,9 @@
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);
       }
-      function setImageBasedOnQueryParam() {
-        // Get the 'image' parameter from the URL (example.html?image=imageName)
+      function setImageFile() {
+        // Get the 'image' parameter from the URL: example.html?image=imageName
         const imageName = getQueryParam("image");
-        // Set the image source dynamically
         const imageElement = document.getElementById("dynamicImage");
         if (imageName) {
           imageElement.src = `img/ohab/${imageName}.png`;
@@ -21,10 +20,24 @@
           imageElement.alt = "Image not specified";
         }
       }
-      window.onload = setImageBasedOnQueryParam;
+      function setBackgroundColor() {
+        // Get the 'bgColor' parameter from the URL: example.html?bgColor=%231C1C1E
+        const bgColor = getQueryParam("bgColor");
+        if (bgColor) {
+          document.body.style.backgroundColor = bgColor;
+        } else {
+          console.error("No 'bgColor' parameter found in the URL.");
+        }
+      }
+      // Combine URL parameter: example.html?image=imageName&bgColor=%231C1C1E
+      // Note: %23 is the hash (#) symbol encoding in the URL)
+      window.onload = function() {
+        setImageFile();
+        setBackgroundColor();
+      };
     </script>
   </head>
-  <body style="background-color: rgba(28,28,30,1.0);">
+  <body>
     <img
       id="dynamicImage"
       style="display: block; margin-top: 34px; margin-left: auto; margin-right: auto;"
